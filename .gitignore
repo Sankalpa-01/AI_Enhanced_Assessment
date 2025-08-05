@@ -1,0 +1,18 @@
+# Node modules
+frontend/node_modules/
+frontend/dist/
+
+# Build outputs
+frontend/dist/
+backend_teachbetter/reports/
+backend_teachbetter/__pycache__/
+
+# Python virtual environment
+backend_teachbetter/venv/
+
+# Environment variables
+backend_teachbetter/.env
+
+# OS files
+.DS_Store
+Thumbs.db
