@@ -97,12 +97,6 @@ TeachBetter_ai_Bulk_assignment_grader/
 
 ---
 
-## 📸 Demo Preview
-
-> _[Add dashboard, upload form, and report screenshots here]_  
-
----
-
 ## 🛡️ Security
 
 - 🔐 API key is loaded via `.env` and **not** committed  
