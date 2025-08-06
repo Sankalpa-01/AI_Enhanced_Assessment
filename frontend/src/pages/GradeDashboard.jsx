@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FileUploadForm from "../components/FileUploadForm";
 import ProgressBar from "../components/ProgressBar";
 import SummaryTable from "../components/SummaryTable";
@@ -7,6 +7,19 @@ import DownloadOptions from "../components/DownloadOptions";
 const GraderDashboard = () => {
   const [gradingData, setGradingData] = useState(null);
   const [progress, setProgress] = useState(0);
+  const [isGrading, setIsGrading] = useState(false);
+
+  useEffect(() => {
+    let interval;
+
+    if (isGrading && progress < 90) {
+      interval = setInterval(() => {
+        setProgress((prev) => Math.min(prev + 5, 90));
+      }, 300); // simulate increment every 300ms
+    }
+
+    return () => clearInterval(interval);
+  }, [isGrading, progress]);
 
   const handleFormSubmit = async (formData) => {
     const data = new FormData();
@@ -26,24 +39,25 @@ const GraderDashboard = () => {
     data.append("grading_level", formData.gradingLevel);
     data.append("grading_context", formData.context);
     data.append("report_details", formData.reportDetails);
-    data.append("output_format", formData.outputFormat); // ✅ spelling fixed
+    data.append("output_format", formData.outputFormat);
 
     try {
-      setProgress(10);
+      setIsGrading(true);
+      setProgress(10); // start at 10%
 
       const response = await fetch("http://127.0.0.1:8000/api/grade/", {
         method: "POST",
         body: data,
       });
 
-      setProgress(60);
-
       const result = await response.json();
-      setGradingData(result); // result = { results: [...] }
+      setGradingData(result);
       setProgress(100);
+      setTimeout(() => setIsGrading(false), 1000);
     } catch (error) {
       console.error("Grading failed:", error);
       setProgress(0);
+      setIsGrading(false);
     }
   };
 

@@ -4,11 +4,13 @@ const ProgressBar = ({ progress }) => {
   return (
     <div className="w-full bg-gray-200 rounded-full h-4 my-6">
       <div
-        className="bg-green-500 h-4 rounded-full transition-all duration-500 ease-in-out"
+        className="bg-green-500 h-4 rounded-full transition-all duration-300 ease-in-out"
         style={{ width: `${progress}%` }}
       />
       <p className="text-sm text-gray-700 mt-1 text-center">
-        {progress}% Grading Completed
+        {progress < 100
+          ? `${progress}% Grading Completed`
+          : "✅ Grading Complete"}
       </p>
     </div>
   );
