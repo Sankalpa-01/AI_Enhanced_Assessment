@@ -6,8 +6,36 @@ from app.downloads.download_utils import zip_reports, get_file_response
 from app.reports.summary_export import export_summary_to_csv
 import os
 import json
+import asyncio
+from fastapi.responses import StreamingResponse
 
 router = APIRouter()
+
+@router.post("/stream-grade/")
+async def stream_grade(
+    answer_sheets: list[UploadFile] = File(...),
+    answer_key: UploadFile = File(...),
+    grading_level: str = Form(...),
+    grading_context: str = Form(""),
+    report_details: str = Form(""),
+    output_format: str = Form("PDF"),
+):
+    async def grade_stream():
+        for file in answer_sheets:
+            # 👇 Call actual grading function here
+            result = await process_single_file_grading(
+                file=file,
+                answer_key_file=answer_key,
+                grading_level=grading_level,
+                context=grading_context,
+                report_meta=report_details,
+                output_format=output_format
+            )
+
+            yield json.dumps(result) + "\n"
+
+    return StreamingResponse(grade_stream(), media_type="application/x-ndjson")
+
 
 @router.post("/grade/")
 async def grade_assignments(
