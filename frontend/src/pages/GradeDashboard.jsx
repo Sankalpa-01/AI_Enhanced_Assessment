@@ -45,13 +45,43 @@ const GraderDashboard = () => {
       setIsGrading(true);
       setProgress(10); // start at 10%
 
-      const response = await fetch("http://127.0.0.1:8000/api/grade/", {
+      // const response = await fetch("http://127.0.0.1:8000/api/grade/", {
+      //   method: "POST",
+      //   body: data,
+      // });
+
+      // const result = await response.json();
+      // setGradingData(result);
+
+      const response = await fetch("http://127.0.0.1:8000/api/stream-grade/", {
         method: "POST",
         body: data,
       });
 
-      const result = await response.json();
-      setGradingData(result);
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      setGradingData({ results: [] }); // start empty
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        let lines = buffer.split("\n");
+        buffer = lines.pop();
+
+        for (const line of lines) {
+          if (line.trim()) {
+            const parsed = JSON.parse(line);
+            setGradingData((prev) => ({
+              results: [...(prev.results || []), parsed],
+            }));
+          }
+        }
+      }
+
       setProgress(100);
       setTimeout(() => setIsGrading(false), 1000);
     } catch (error) {
