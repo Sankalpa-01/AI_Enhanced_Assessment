@@ -1,13 +1,13 @@
-# 📚 TeachBetter AI – Bulk Assignment Grader
+# 📚 AI Enhanced Assessment
 
-An intelligent assignment grading system that automatically evaluates student answer sheets using OpenAI's GPT models. It supports bulk uploads, grading based on a reference key, and generates clean, downloadable PDF reports and a CSV summary.
+An intelligent assignment grading system that automatically evaluates student answer sheets using Gemini models. It supports bulk uploads, grading based on a reference key, and generates clean, downloadable PDF reports and a CSV summary.
 
 ---
 
 ## 🚀 Features
 
 - 🔍 OCR and Docx-based answer extraction  
-- 🧠 AI-powered grading with OpenAI GPT-4o  
+- 🧠 AI-powered grading with Gemini-pro-latest  
 - 📊 Per-question breakdown with correctness  
 - 📄 Auto-generated PDF reports per student  
 - 📥 CSV summary export  
@@ -22,7 +22,7 @@ An intelligent assignment grading system that automatically evaluates student an
 |-----------|----------------------------|
 | Frontend  | React + Tailwind + Vite    |
 | Backend   | FastAPI (Python)           |
-| AI Grading| OpenAI GPT-4o              |
+| AI Grading| Gemini-pro-latest          |
 | Storage   | Local filesystem (PDF, CSV)|
 | OCR       | pytesseract + OpenCV       |
 | Docs      | python-docx / PyMuPDF      |
@@ -34,8 +34,8 @@ An intelligent assignment grading system that automatically evaluates student an
 ### ⚙️ 1. Clone the repo
 
 ```bash
-git clone https://github.com/Sankalpa-01/TeachBetter_ai_Bulk_assignment_grader.git
-cd TeachBetter_ai_Bulk_assignment_grader
+git clone https://github.com/Sankalpa-01/AI_Enhanced_Assessment.git
+cd AI_Enhanced_Assessment
 ```
 
 ### 🐍 2. Backend Setup
@@ -74,7 +74,7 @@ npm run dev
 ## 📂 Folder Structure
 
 ```
-TeachBetter_ai_Bulk_assignment_grader/
+AI_Enhanced_Assessment/
 │
 ├── backend_teachbetter/
 │   ├── app/
