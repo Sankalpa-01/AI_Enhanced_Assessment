@@ -18,7 +18,6 @@
 
 // export default ProgressBar;
 
-// ProgressBar.jsx
 import React from "react";
 
 const ProgressBar = ({ progress }) => {

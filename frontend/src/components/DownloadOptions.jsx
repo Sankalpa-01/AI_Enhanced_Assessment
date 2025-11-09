@@ -38,7 +38,6 @@
 
 // export default DownloadOptions;
 
-// DownloadOptions.jsx
 import React from "react";
 import { Download, FileText, FileArchive } from "lucide-react";
 
